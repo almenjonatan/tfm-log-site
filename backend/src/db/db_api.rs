@@ -1,8 +1,8 @@
-use sqlx::{
-    postgres::PgPoolOptions, sqlite::SqlitePoolOptions, Connection, Pool, Sqlite, SqliteConnection, Postgres,
-};
+use sqlx::{postgres::PgPoolOptions, Connection, Pool, Postgres};
 
-pub async fn create_pool() -> Pool<Sqlite> {
-        
-    pool
+pub async fn create_pool() -> Pool<Postgres> {
+    PgPoolOptions::new()
+        .connect("postgres://postgres:password@localhost:5432/logs")
+        .await
+        .unwrap()
 }
