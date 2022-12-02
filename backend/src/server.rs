@@ -1,9 +1,17 @@
-use axum::{response::Json, routing::post, Router};
+use axum::{
+    response::Json,
+    routing::{get, post},
+    Router,
+};
 
 use crate::models::game::Game;
 
 async fn upload(Json(game): Json<Game>) {
     println!("{:#?}", game);
+}
+
+async fn hello() -> &'static str {
+    "hello world"
 }
 
 pub async fn run() {
@@ -14,7 +22,9 @@ pub async fn run() {
         )
     }
 
-    let app = Router::new().route("/upload", post(upload));
+    let app = Router::new()
+        .route("/upload", post(upload))
+        .route("/hello", get(hello));
 
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
         .serve(app.into_make_service())
