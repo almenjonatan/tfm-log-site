@@ -1,4 +1,4 @@
-use sqlx::{postgres::PgPoolOptions, Connection, Pool, Postgres};
+use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 
 pub async fn create_pool() -> Pool<Postgres> {
     PgPoolOptions::new()
